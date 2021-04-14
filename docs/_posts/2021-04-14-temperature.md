@@ -67,4 +67,4 @@ plt.ylabel(r'Specific intensity [Jy/sr]')
 plt.savefig('../img/dBdT.png', bbox_inches='tight')
 ```
 
-![Anisotropy scaling](https://raw.githubusercontent.com/dncnwtts/blg/gh-pages/docs/assets/img/dBdT.png)
+![Derivative of a blackbody](https://raw.githubusercontent.com/dncnwtts/blg/gh-pages/docs/assets/img/dBdT.png "Python plot")
