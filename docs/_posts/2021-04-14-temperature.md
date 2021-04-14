@@ -17,7 +17,7 @@ $$ B_\nu(T_0+\Delta T)\simeq B_\nu(T_0)+\frac{\partial B_\nu}{\partial T}\Delta 
 
 Now this is where things get a little tricky. To make mathematical models, we tend to want to deal with the physical underlying quantities, in this case, $\Delta T$, the fluctuation, in kelvin, about a blackbody $T_0$. But we also want to make measurements, which requires a some kind of prediction of how much power lands on our detector.
 
-So a natural question becomes then, if we have an anistropy of size $\Delta T$, what will its specific intensity be at a frequency $\nu$?
+So a natural question becomes then, if we have an anisotropy of size $\Delta T$, what will its specific intensity be at a frequency $\nu$?
 
 The obvious answer is that, $B_\nu(T_0+\Delta T)$, a blackbody. But of course, we tend to subtract the monopole when making observations just because it is such a difficult quantity to measure, so really what we are measuring is
 
@@ -32,7 +32,7 @@ $$
 
 This is a sort of weird position, because we want to report fluctuations with respect to the CMB at every frequency, so cosmologists often use units called $\mathrm{K_{CMB}}$, which leave the anisotropies constant over all frequencies. This is weirder than it might seem at first.
 
-The main thing that I had forgotten is that *the CMB is a blackbody* but *the fluctuations are not blackbodies*. It might seem a bit obvious, but while we often look at maps of the CMB fluctuations, those are not the physical photons that we are looking at, so these mathematical conveniences no longer are governed by the well-known Planck SED $B_\nu(T)$.
+The main thing that I had forgotten is that **the CMB is a blackbody** but **the fluctuations are not blackbodies**. It might seem a bit obvious, but while we often look at maps of the CMB fluctuations, those are not the physical photons that we are looking at, so these mathematical conveniences no longer are governed by the well-known Planck SED $B_\nu(T)$.
 
 ```python
 import matplotlib.pyplot as plt
@@ -74,18 +74,20 @@ Now dividing out the spectral dependence for CMB anisotropies might be good for 
 
 Often it is convenient to characterize radiation from a foreground source in terms of Rayleigh-Jeans temperature,
 
-$$ T_\mathrm{RJ}=\frac{c^2}{2k_B\nu^2}I_\nu, $$
+$$ T_\mathrm{RJ}=\frac{c^2}{2k\nu^2}I_\nu, $$
 
 so-called because in the Rayleigh-Jeans limit $h\nu/kT\ll1$,  $T_\mathrm{RJ}\to T$ for a blackbody emission.
 
-If we are given a map in $\mathrm{K_{CMB}}$ units or $K_\mathrm{RJ}$ units, we need to do a kind of weird conversion. Since $\Delta T$ is often reported as in CMB temperature units, $\partial B_\nu/\partial T$ could be a hint.
+If we are given a map in $\mathrm{K_{CMB}}$ units or $\mathrm K_\mathrm{RJ}$ units, we need to do a kind of weird conversion. Since $\Delta T$ is often reported as in CMB temperature units, $\partial B_\nu/\partial T$ could be a hint.
 
 $$ B_\nu(T_0+dT) = B_\nu(T_0) +\frac{\partial B_\nu}{\partial T}\Delta T$$
 
-$$ T_\nu^{T_0+dT} = T_\nu^{T_0} + \frac{c^2}{2\nu^2k_B}\frac{\partial B_\nu}{\partial T} \Delta T$$
+$$ T_\nu^{T_0+dT} = T_\nu^{T_0} + \frac{c^2}{2\nu^2k}\frac{\partial B_\nu}{\partial T} \Delta T$$
 
-From this, it's clear that $\Delta T$'s coefficient is the conversion factor from $\mathrm{K_CMB}$ to $\mathrm K_{RJ}$;
+From this, it's clear that $\Delta T$'s coefficient is the conversion factor from $\mathrm{K_{CMB}}$ to $\mathrm K_{RJ}$;
 
-$$ \mathrm{K_{CMB}}\to\mathrm{K_{RJ}} = \frac{x^2e^x}{(e^x-1)} $$
+$$ [\mathrm{K_{CMB}}\to\mathrm{K_{RJ}}] = \frac{x^2e^x}{(e^x-1)^2} $$
 
 where $x=h\nu/kT$.
+
+So that seems to be it. In my naivety, I used to think that the weird units were brightness temperature. Now I see that it's the so-called "CMB temperature" that's strange.
