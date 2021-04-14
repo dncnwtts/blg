@@ -4,7 +4,7 @@ title: "What is 'CMB Temperature'?"
 author: "Duncan J. Watts"
 categories: journal
 tags: [documentation,sample]
-<!-- image: mountains.jpg-->
+<!--image: mountains.jpg-->
 ---
 
 
