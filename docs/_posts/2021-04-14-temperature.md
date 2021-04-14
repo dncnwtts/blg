@@ -7,11 +7,6 @@ tags: [documentation,sample]
 <!--image: mountains.jpg-->
 ---
 
-
-## What are temperatures?
-
-Going to figure out math here, but the basic idea is to show why CMB fluctuations do not have the same SED as a blackbody.
-
 To the best of our knowledge, the CMB is a blackbody, whose spectral energy distribution (SED) is given by
 
 $$ B_\nu(T)=\frac{2h\nu^3}{c^2}\frac1{e^{h\nu/kT}-1} $$
@@ -36,3 +31,40 @@ $$
 $$
 
 This is a sort of weird position, because we want to report fluctuations with respect to the CMB at every frequency, so cosmologists often use units called $\mathrm{K_{CMB}}$, which leave the anisotropies constant over all frequencies. This is weirder than it might seem at first.
+
+The main thing that I had forgotten is that *the CMB is a blackbody* but *the fluctuations are not blackbodies*. It might seem a bit obvious, but while we often look at maps of the CMB fluctuations, those are not the physical photons that we are looking at, so these mathematical conveniences no longer are governed by the well-known Planck SED $B_\nu(T)$.
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+from astropy import units as u
+from astropy import constants as c
+
+def B(nu, T):
+    A = 2*c.h*nu**3/c.c**2
+    x = c.h*nu/(c.k_B*T)
+    return A.si/np.expm1(x.si)
+
+def dBdT(nu, T):
+    x = c.h*nu/(c.k_B*T)
+    A = 2*c.k_B*nu**2/c.c**2
+    return A.si*x.si**2*np.exp(x.si)/np.expm1(x.si)**2
+
+T0 = 2.7275*u.K
+dT = 3.5*u.mK
+nu = np.linspace(0, 1000)*u.GHz
+
+plt.figure(figsize=(4,3))
+
+plt.plot(nu, B(nu,T0), label=r'$B_\nu(T_0)$')
+plt.plot(nu, B(nu,T0+dT)-B(nu,T0), label=r'$\Delta B_\nu$')
+plt.plot(nu, dBdT(nu, T0)*dT.si,'k:', label=r'$\frac{\partial B_\nu}{\partial T}\Delta T$')
+
+plt.yscale('log')
+plt.legend(loc='best')
+plt.xlabel(r'$\nu$ [GHz]')
+plt.ylabel(r'Specific intensity [Jy/sr]')
+plt.savefig('../img/dBdT.png', bbox_inches='tight')
+```
+
+![Anisotropy scaling](dBdT.png "Meta title")
