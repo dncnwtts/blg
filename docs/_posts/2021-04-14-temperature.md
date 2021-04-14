@@ -30,7 +30,9 @@ $$ B_\nu(T_0+\Delta T) - B_\nu(T_0)\simeq\frac{\partial B_\nu}{\partial T}\Delta
 
 This means that for a single anisotropy brightness, the spectrum is given by
 
-$$ \frac{\partial B_\nu}{\partial T}=\frac{2h\nu^3}{c^2}
-\frac{e^{h\nu/kT}}{(e^{h\nu/kT}-1)^2}\frac{h\nu}{kT^2}. $$
+$$
+\frac{\partial B_\nu}{\partial T}=\frac{2h\nu^3}{c^2}
+\frac{e^{h\nu/kT}}{(e^{h\nu/kT}-1)^2}\frac{h\nu}{kT^2}.
+$$
 
 This is a sort of weird position, because we want to report fluctuations with respect to the CMB at every frequency, so cosmologists often use units called $\mathrm{K_{CMB}}$, which leave the anisotropies constant over all frequencies. This is weirder than it might seem at first.
