@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Welcome to Lagrange!
+title: About
 ---
 
-Update the `menu/about.md` file to change your About page.
+This is a repository for my writing that doesn't fit in any of the usual contexts.
