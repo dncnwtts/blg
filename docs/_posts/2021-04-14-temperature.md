@@ -76,15 +76,15 @@ Often it is convenient to characterize radiation from a foreground source in ter
 
 $$ T_\mathrm{RJ}=\frac{c^2}{2k\nu^2}I_\nu, $$
 
-so-called because in the Rayleigh-Jeans limit $h\nu/kT\ll1$,  $T_\mathrm{RJ}\to T$ for a blackbody emission.
+so-called because in the Rayleigh-Jeans limit $h\nu/kT\ll1$,  $T_\mathrm{RJ}\to T$ for a blackbody emitter.
 
 If we are given a map in $\mathrm{K_{CMB}}$ units or $\mathrm K_\mathrm{RJ}$ units, we need to do a kind of weird conversion. Since $\Delta T$ is often reported as in CMB temperature units, $\partial B_\nu/\partial T$ could be a hint.
 
 $$ B_\nu(T_0+dT) = B_\nu(T_0) +\frac{\partial B_\nu}{\partial T}\Delta T$$
 
-$$ T_\nu^{T_0+dT} = T_\nu^{T_0} + \frac{c^2}{2\nu^2k}\frac{\partial B_\nu}{\partial T} \Delta T$$
+$$ T_\mathrm{RJ}^{T_0+dT} = T_\mathrm{RJ}^{T_0} + \frac{c^2}{2\nu^2k}\frac{\partial B_\nu}{\partial T} \Delta T$$
 
-From this, it's clear that $\Delta T$'s coefficient is the conversion factor from $\mathrm{K_{CMB}}$ to $\mathrm K_{RJ}$;
+From this, it's clear that $\Delta T$'s coefficient is the conversion factor from $\mathrm{K_{CMB}}$ to $\mathrm{K_{RJ}}$;
 
 $$ [\mathrm{K_{CMB}}\to\mathrm{K_{RJ}}] = \frac{x^2e^x}{(e^x-1)^2} $$
 
