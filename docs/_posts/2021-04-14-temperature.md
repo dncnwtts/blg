@@ -68,3 +68,25 @@ plt.savefig('../img/dBdT.png', bbox_inches='tight')
 ```
 
 ![Derivative of a blackbody](https://raw.githubusercontent.com/dncnwtts/blg/gh-pages/docs/assets/img/dBdT.png "Python plot")
+
+
+Now dividing out the spectral dependence for CMB anisotropies might be good for characterizing those fluctuations, but if you have other foregrounds with SEDs given by $I_\nu$, things can get a bit weird.
+
+Often it is convenient to characterize radiation from a foreground source in terms of Rayleigh-Jeans temperature,
+
+$$ T_\mathrm{RJ}=\frac{c^2}{2k_B\nu^2}I_\nu, $$
+
+so-called because in the Rayleigh-Jeans limit $h\nu/kT\ll1$,  $T_\mathrm{RJ}\to T$ for a blackbody emission.
+
+If we are given a map in $\mathrm{K_{CMB}}$ units or $K_\mathrm{RJ}$ units, we need to do a kind of weird conversion. Since $\Delta T$ is often reported as in CMB temperature units, $\partial B_\nu/\partial T$ could be a hint.
+
+$$ B_\nu(T_0+dT) = B_\nu(T_0) +\frac{\partial B_\nu}{\partial T}\Delta T$$
+
+$$ T_\nu^\mathrm{T_0+dT} = T_\nu^{T_0} + \frac{c^2}{2\nu^2k_B}\frac{\partial B_\nu}{\partial T}
+\Delta T$$
+
+From this, it's clear that $\Delta T$'s coefficient is the conversion factor from $|mathrm{K_CMB}$ to $\mathrm K_{RJ}$;
+
+$$ \mathrm{K_{CMB}}\to\mathrm{K_{RJ}} = \frac{x^2e^x}{(e^x-1)} $$
+
+where $x=h\nu/kT$.
