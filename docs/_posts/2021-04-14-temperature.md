@@ -82,10 +82,9 @@ If we are given a map in $\mathrm{K_{CMB}}$ units or $K_\mathrm{RJ}$ units, we n
 
 $$ B_\nu(T_0+dT) = B_\nu(T_0) +\frac{\partial B_\nu}{\partial T}\Delta T$$
 
-$$ T_\nu^\mathrm{T_0+dT} = T_\nu^{T_0} + \frac{c^2}{2\nu^2k_B}\frac{\partial B_\nu}{\partial T}
-\Delta T$$
+$$ T_\nu^{T_0+dT} = T_\nu^{T_0} + \frac{c^2}{2\nu^2k_B}\frac{\partial B_\nu}{\partial T} \Delta T$$
 
-From this, it's clear that $\Delta T$'s coefficient is the conversion factor from $|mathrm{K_CMB}$ to $\mathrm K_{RJ}$;
+From this, it's clear that $\Delta T$'s coefficient is the conversion factor from $\mathrm{K_CMB}$ to $\mathrm K_{RJ}$;
 
 $$ \mathrm{K_{CMB}}\to\mathrm{K_{RJ}} = \frac{x^2e^x}{(e^x-1)} $$
 
