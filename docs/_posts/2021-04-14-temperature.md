@@ -11,7 +11,7 @@ To the best of our knowledge, the CMB is a blackbody, whose spectral energy dist
 
 $$ B_\nu(T)=\frac{2h\nu^3}{c^2}\frac1{e^{h\nu/kT}-1} $$
 
-A few Nobel prizes ago, we discovered that the CMB is basically a monopole with $T_0=2.7275\,\mathrm K$, plus a dipole of order 3.5 mK, and primordial fluctuations on order of $100\,\mathrm{\mu K}$. To the physicist brain, this is a perfect opportunity to Taylor expand, while the astronomer brain recognizes that monopoles are really hard to measure, so we probably want to look at fluctuations anyway. Therefore, it makes more sense to look at the SED 
+A few Nobel prizes ago, we discovered that the CMB is basically a monopole with $T_0=2.725\,\mathrm K$, plus a dipole of order 3.5 mK, and primordial fluctuations on order of $100\,\mathrm{\mu K}$. To the physicist brain, this is a perfect opportunity to Taylor expand, while the astronomer brain recognizes that monopoles are really hard to measure, so we probably want to look at fluctuations anyway. Therefore, it makes more sense to look at the SED 
 
 $$ B_\nu(T_0+\Delta T)\simeq B_\nu(T_0)+\frac{\partial B_\nu}{\partial T}\Delta T. $$
 
