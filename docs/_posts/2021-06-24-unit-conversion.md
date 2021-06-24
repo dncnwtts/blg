@@ -21,9 +21,23 @@ Generally though, we try to convert the data into some more physical quantity, s
 $$
 \int\,\mathrm d\nu\,\tau(\nu)\frac{dI_\nu}{dX_i}
 $$
+
 So that's the total energy binned in $dX_i$.
 
 Part of where I get confused by this is that you have to make a choice that may not actually correspond to the "right answer" before you report your answer. But of course, units are just a convention, so we must have the total energy per frequency bin be the same per unit conversion; if you use $X_i$ and $X_j$, the answer should physically be the same;
+
 $$
 dI_\nu=\frac{dI_\nu}{dX_i}\,\mathrm dX_i=\frac{dI_\nu}{dX_j}\,\mathrm dX_j
 $$
+
+At the end of the day then, if you want to convert from units $X_i$ to units $X_j$, you must multiply by the conversion factor 
+
+$$
+\frac{dX_i}{dX_j}
+=\frac{\int \mathrm d\nu\,\tau(\nu)\frac{dI_\nu}{dX_j}}{\int\,\mathrm d\nu\,\tau(\nu) \frac{dI_\nu}{dX_i}}.
+$$
+
+
+This is so simple that it kind of gets confusing. So let's try and be explicit, and bear with me, those who are actually trying to learn something.
+
+One convention that people use is the IRAS convention, defined such that $\nu\,\mathrm dI_\nu$ is constant, or that you have some emission $I_\nu=I_c(\nu_c/\nu)$, such that you're referencing the value at some reference frequency.
