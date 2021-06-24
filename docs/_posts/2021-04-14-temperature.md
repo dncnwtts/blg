@@ -17,8 +17,7 @@ $$ B_\nu(T_0+\Delta T)\simeq B_\nu(T_0)+\frac{\partial B_\nu}{\partial T}\Delta 
 
 Now this is where things get a little tricky. To make mathematical models, we tend to want to deal with the physical underlying quantities, in this case, $\Delta T$, the fluctuation, in kelvin, about a blackbody $T_0$. But we also want to make measurements, which requires a some kind of prediction of how much power lands on our detector.
 
-So a natural question becomes then, if we have an anisotropy of size $\Delta T$, what will its specific intensity be at a frequency $\nu$?
-
+So a natural question becomes then, if we have an anisotropy of size $\Delta T$, what will its specific intensity be at a frequency $\nu$?  
 The obvious answer is that, $B_\nu(T_0+\Delta T)$, a blackbody. But of course, we tend to subtract the monopole when making observations just because it is such a difficult quantity to measure, so really what we are measuring is
 
 $$ B_\nu(T_0+\Delta T) - B_\nu(T_0)\simeq\frac{\partial B_\nu}{\partial T}\Delta T. $$
