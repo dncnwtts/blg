@@ -52,7 +52,7 @@ b_\nu'\equiv \frac{\partial B_\nu}{\partial T_\mathrm{CMB}}
 =\frac{2h\nu^3}{c^2}\frac{e^{h\nu/kT_\mathrm{CMB}}}{(e^{h\nu/kT_\mathrm{CMB}}-1)^2}\frac{h\nu}{kT_\mathrm{CMB}^2}.
 $$
 
-It is worth mentioning something about the units here; $dI_\nu/dI_c$ is unitless, whereas $dI_\nu/dT_\mathrm{CMB}$ has units of $\mathrm{MJy\,sr^{-1}\,K_{CMB}^{-1}}$. If we are to let the units be our guide, then you would imagine wanting to multiplying a quantity with units of $K_\mathrm{CMB}$ with something that's a function of $b_\nu'$ to get it into $\mathrm{MJy\,sr^{-1}}$.
+It is worth mentioning something about the units here; $dI_\nu/dI_c$ is unitless, whereas $dI_\nu/dT_\mathrm{CMB}$ has units of $\mathrm{MJy\,sr^{-1}\,K_{CMB}^{-1}}$. If we are to let the units be our guide, then you would imagine wanting to multiplying a quantity with units of $\mathrm{K_{CMB}}$ with something that's a function of $b_\nu'$ to get it into $\mathrm{MJy\,sr^{-1}}$.
 
 With this all done, we have successfully put ourselves in a position to reproduce Equation (32) of Planck IX 2013;
 
