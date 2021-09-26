@@ -53,7 +53,8 @@ Doing a little bit of algebra, we can show that the mean $\boldsymbol c$ and cov
 
 $$
 \mathsf F^{-1}=\mathsf S^{-1}+\mathsf T^T\mathsf N^{-1}\mathsf T,\qquad
-\mathsf F\boldsymbol c=\mathsf T^t\mathsf N^{-1}\boldsymbol d
+\mathsf F^{-1}\boldsymbol c=\mathsf T^t\mathsf N^{-1}\boldsymbol d
++\mathsf S^{-1}\boldsymbol m
 $$
 
 In general, if you want to draw a sample from a multivariate distribution $\boldsymbol x\sim\mathcal N(\boldsymbol m,\mathsf C)$, you can produce it using
@@ -62,10 +63,10 @@ $$
 \boldsymbol x=\boldsymbol\mu+\mathsf C^{1/2}\boldsymbol \eta
 $$
 
-where $\boldsymbol \eta\sim\mathcal(\boldsymbol 0,\mathsf I)$, which is quite easy to sample, as long as you have a routine to generate uniform random variates, and $\mathsf C^{1/2}$ is some non-unique matrix where $\mathsf C=(\mathsf C^{1/2})(\mathsf C^{1/2})^T$. We can verify this directly;
+where $\boldsymbol \eta\sim\mathcal N(\boldsymbol 0,\mathsf I)$, which is quite easy to sample, as long as you have a routine to generate uniform random variates, and $\mathsf C^{1/2}$ is some non-unique matrix where $\mathsf C=(\mathsf C^{1/2})(\mathsf C^{1/2})^T$. We can verify this directly;
 
 $$
-\langle\boldsymbol x\rangle=\boldsymbol\mu+\mathsf C^{1/2}\langle\bolsymbol\eta\rangle
+\langle\boldsymbol x\rangle=\boldsymbol\mu+\mathsf C^{1/2}\langle\boldsymbol\eta\rangle
 =\boldsymbol\mu
 $$
 
@@ -75,9 +76,55 @@ $$
 \langle\boldsymbol x\boldsymbol x^T\rangle
 =\boldsymbol \mu\boldsymbol \mu^T
 +\mathsf C^{1/2}\langle\boldsymbol\eta\boldsymbol\eta^T\rangle(\mathsf C^{1/2})^T
-=\langle\boldsymbol\mu\rangle\boldsymbol\mu\rangle^T
+=\langle\boldsymbol\mu\rangle\langle \boldsymbol\mu\rangle^T
 +\mathsf C
 $$
 
 
+So in principle, to sample $\boldsymbol x$, we we should just be able to write $\boldsymbol x=\boldsymbol c+\mathsf F^{1/2}\boldsymbol\eta$. The problem with this straightforward approach is that it involves taking the inverse and square root of matrices, both of which are $\mathcal O(n^3)$ operations.
 
+A way to simplify this is by using iterative methods. You can rewrite the direct sampling as $\mathsf F^{-1}\boldsymbol x=\mathsf F^{-1}\boldsymbol c+\mathsf F^{-1/2}\boldsymbol\eta$, or
+
+$$
+(\mathsf S^{-1}+\mathsf T^T\mathsf N^{-1}\mathsf T)\boldsymbol x
+=\mathsf T^T\mathsf N^{-1}\boldsymbol d+\mathsf S^{-1}\boldsymbol m
++(\mathsf S^{-1}+\mathsf T^T\mathsf N^{-1}\mathsf T)^{1/2}\boldsymbol\eta
+$$
+
+If there was no sampling, this would be quite simple. However, taking the square root of this matrix still is not great. However, if we pretend that we were sampling for $\boldsymbol y=(\mathsf S^{-1}+\mathsf T^T\mathsf N^{-1}\mathsf T)\boldsymbol x$, we could write it as $\boldsymbol y=\boldsymbol \mu_y+\mathsf C_y^{1/2}\boldsymbol \eta$, which implies that
+
+$$
+\mathsf C_y=\mathsf S^{-1}+\mathsf T^T\mathsf N^{-1}\mathsf T
+$$
+
+Now $\boldsymbol y$ can be drawn from a distribution $\mathcal N(\boldsymbol\mu_y,\mathsf C_y)$. This is where something magical happens;
+
+$$
+\boldsymbol y\sim\mathcal N(\boldsymbol\mu_y,\mathsf S^{-1}
++\mathsf T^T\mathsf N^{-1}\mathsf T)
+$$
+
+can be decomposed into two Gaussian variables, $\boldsymbol y=\boldsymbol y_1+\boldsymbol y_2$, where
+
+$$
+\boldsymbol y_1\sim\mathcal N(\boldsymbol\mu_y,\mathsf S^{-1}),\qquad
+\boldsybmol y_2\sim\mathcal N(\boldsymbol 0,\mathsf T^T\mathsf N^{-1}\mathsf T)
+$$
+
+Now this is much easier to sample from;
+
+$$
+\boldsymbol y=\boldsymbol\mu_y+\mathsf S^{-1/2}\boldsymbol\eta_1
++\mathsf T^T\mathsf N^{-1/2}\boldsymbol\eta_2
+$$
+
+or, in terms of the variables we were starting with in the first place,
+
+$$
+(\mathsf S^{-1}+\mathsf T^T\mathsf N^{-1}\mathsf T)\boldsymbol x
+=\mathsf T^T\mathsf N^{-1}\boldsymbol d+\mathsf S^{-1}\boldsymbol m
++\mathsf S^{-1/2}\boldsymbol\eta_1
++\mathsf T^T\mathsf N^{-1/2}\boldsymbol\eta_2
+$$
+
+And that, my friends, is how you draw a random sample of a very high-dimensional Gaussian random variable.
