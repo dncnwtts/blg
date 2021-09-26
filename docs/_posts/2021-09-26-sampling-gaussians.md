@@ -27,10 +27,12 @@ $$
 In case this isn't super obvious, we can compute the mean and covariance by hand;
 $$
 \langle \boldsymbol d\rangle
-=\langle\mathsf A\boldymbol x\rangle+\langle\boldsymbol n\rangle
+=\langle\mathsf A\boldsymbol x\rangle+\langle\boldsymbol n\rangle
 =\mathsf A\boldsymbol x
 $$
+
 since we take $\boldsymbol x$ to be fixed.
+
 $$
 \mathsf D=\langle\boldsymbol d\boldsymbol d^T\rangle
 -\langle\boldsymbol d\rangle\langle\boldsymbol d\rangle^T
@@ -39,3 +41,43 @@ $$
 (\mathsf A\boldsymbol x)(\mathsf A\boldsymbol x)^T
 =\mathsf N
 $$
+
+Now if we are Bayesian, we could use $P(\boldsymbol x\mid\boldsymbol d)\propto P(\boldsymbol x)P(\boldsymbol d\mid\boldsymbol x)$;
+
+$$
+-2\ln P(\boldsymbol x\mid\boldsymbol d)=\boldsymbol x^T\mathsf S^{-1}\boldsymbol x
++(\boldsymbol d-\mathsf A\boldsymbol x)^T\mathsf N^{-1}(\boldsymbol d-\mathsf A\boldsymbol x)
+$$
+
+Doing a little bit of algebra, we can show that the mean $\boldsymbol c$ and covariance matrix $\mathsf F$ are given by
+
+$$
+\mathsf F^{-1}=\mathsf S^{-1}+\mathsf T^T\mathsf N^{-1}\mathsf T,\qquad
+\mathsf F\boldsymbol c=\mathsf T^t\mathsf N^{-1}\boldsymbol d
+$$
+
+In general, if you want to draw a sample from a multivariate distribution $\boldsymbol x\sim\mathcal N(\boldsymbol m,\mathsf C)$, you can produce it using
+
+$$
+\boldsymbol x=\boldsymbol\mu+\mathsf C^{1/2}\boldsymbol \eta
+$$
+
+where $\boldsymbol \eta\sim\mathcal(\boldsymbol 0,\mathsf I)$, which is quite easy to sample, as long as you have a routine to generate uniform random variates, and $\mathsf C^{1/2}$ is some non-unique matrix where $\mathsf C=(\mathsf C^{1/2})(\mathsf C^{1/2})^T$. We can verify this directly;
+
+$$
+\langle\boldsymbol x\rangle=\boldsymbol\mu+\mathsf C^{1/2}\langle\bolsymbol\eta\rangle
+=\boldsymbol\mu
+$$
+
+and
+
+$$
+\langle\boldsymbol x\boldsymbol x^T\rangle
+=\boldsymbol \mu\boldsymbol \mu^T
++\mathsf C^{1/2}\langle\boldsymbol\eta\boldsymbol\eta^T\rangle(\mathsf C^{1/2})^T
+=\langle\boldsymbol\mu\rangle\boldsymbol\mu\rangle^T
++\mathsf C
+$$
+
+
+
