@@ -94,7 +94,7 @@ $$
 \hat{C}_{\ell}=\sigma_{\ell}+\frac{w^{-1}}{2\ell+1}\chi_{2\ell+1}^{2}+\eta\sqrt{\frac{4w^{-1}}{2\ell+1}\sigma_{\ell}}.
 $$
 
-Since the mean of the $\chi^{2}_{2\ell+1}$ distribution is $2\ell+1$, the total power spectrum should be $\hat C_\ell=\sigma_\ell+w^{-1}$.
+Since the mean of the $\chi^{2}_{\nu}$ distribution is $\nu$, the total power spectrum should be $\hat C_\ell=\sigma_\ell+w^{-1}$.
 
 This $w^{-1}$ value is sort of useful, because CMB experiments often define the map sensitivity in terms of $w^{-1/2}$, which has units of temperature-angle, e.g., $\mathrm{\mu K\,arcmin}$. Therefore, if we want to estimate the noise bias power spectrum, $N_\ell$, we simply need to square the map sensitivity and convert it to $\mathrm{K^2\,sr}$.
 
