@@ -79,7 +79,7 @@ so-called because in the Rayleigh-Jeans limit $h\nu/kT\ll1$,  $T_\mathrm{RJ}\to 
 
 If we are given a map in $\mathrm{K_{CMB}}$ units or $\mathrm K_\mathrm{RJ}$ units, we need to do a kind of weird conversion. Since $\Delta T$ is often reported as in CMB temperature units, $\partial B_\nu/\partial T$ could be a hint.
 
-$$ B_\nu(T_0+dT) = B_\nu(T_0) +\frac{\partial B_\nu}{\partial T}\Delta T$$
+$$ B_\nu(T_0+\Delta T) = B_\nu(T_0) +\frac{\partial B_\nu}{\partial T}\Delta T$$
 
 $$ T_\mathrm{RJ}^{T_0+\Delta T} = T_\mathrm{RJ}^{T_0} + \frac{c^2}{2\nu^2k}\frac{\partial B_\nu}{\partial T} \Delta T$$
 
