@@ -78,6 +78,7 @@ The first term is just the on-sky power spectrum, $\sigma_{\ell}$. The second te
 $$
 \frac{1}{2\ell+1}\sum_{m}|n_{\ell m}|^{2}=\frac{w^{-1}}{2\ell+1}\sum_{m}|\eta|^{2}=\frac{w^{-1}}{2\ell+1}\chi_{2\ell+1}^{2}
 $$
+where $\eta$ is a standard normal variable.
 
 The final term is a bit more difficult, but still just a sum of Gaussians;
 
