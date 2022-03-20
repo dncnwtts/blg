@@ -94,6 +94,36 @@ $$
 \hat{C}_{\ell}=\sigma_{\ell}+\frac{w^{-1}}{2\ell+1}\chi_{2\ell+1}^{2}+\eta\sqrt{\frac{4w^{-1}}{2\ell+1}\sigma_{\ell}}.
 $$
 
-Since the mean of the $\chi^2_\nu$ distribution is $\nu$, the total power spectrum should be $\hat C_\ell=\sigma_\ell+w^{-1}$.
+Since the mean of the $\chi^{2}_{2\ell+1}$ distribution is $2\ell+1$, the total power spectrum should be $\hat C_\ell=\sigma_\ell+w^{-1}$.
 
 This $w^{-1}$ value is sort of useful, because CMB experiments often define the map sensitivity in terms of $w^{-1/2}$, which has units of temperature-angle, e.g., $\mathrm{\mu K\,arcmin}$. Therefore, if we want to estimate the noise bias power spectrum, $N_\ell$, we simply need to square the map sensitivity and convert it to $\mathrm{K^2\,sr}$.
+
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import healpy as hp
+ell = np.arange(200)
+Cl = np.zeros(len(ell))
+Cl[2:] = 1.0 / ell[2:] ** 2
+m = hp.synfast(Cl, 128)
+sl = hp.anafast(m, lmax=ell.max())
+n = np.random.randn(m.size)
+clhat = hp.anafast(m+n, lmax=ell.max())
+N_l = np.ones_like(ell)*hp.nside2pixarea(128)
+Clhat_2 = sl + hp.nside2pixarea(128)*np.random.chisquare(2*ell+1)/(2*ell+1) + np.random.randn(ell.size)*np.sqrt(2*hp.nside2pixarea(128)*sl/(2*ell+1))
+plt.loglog(ell[2:], Cl[2:] + N_l[2:])
+plt.loglog(ell[2:], sl[2:], label=r'$\sigma_\ell$')
+plt.loglog(ell[2:], N_l[2:], label=r'$N_\ell$')
+plt.loglog(ell[2:], clhat[2:], label=r'$\hat C_\ell$')
+plt.loglog(ell[2:], Clhat_2[2:], label=r'$\hat C_\ell^\mathrm{pred}$')
+plt.xscale('linear')
+plt.legend(loc='best')
+plt.xlabel(r'$\ell$')
+plt.ylabel(r'$C_\ell\,[\mathrm{K^2\,sr}]$')
+plt.savefig('noise_bias.png', bbox_inches='tight')
+```
+
+
+![Example of simulated noise bias](https://raw.githubusercontent.com/dncnwtts/blg/gh-pages/docs/assets/img/noise_bias.png "Python plot")
+
