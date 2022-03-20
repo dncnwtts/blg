@@ -28,7 +28,7 @@ $$
 where
 
 $$
-s_{\ell m}=\int d\Omega\,Y_{\ell m}\,s_p\simeq\sum_{p}\Delta\Omega_{p}Y_{\ell m}s_{p}.
+s_{\ell m}=\int d\Omega\,Y_{\ell m}\,s(\Omega)\simeq\sum_{p}\Delta\Omega_{p}Y_{\ell m}s_{p}.
 $$
 
 I am also using the “real” spherical harmonics here, just so that we don't have to deal with complex number statistics. Again, we are assuming $s_{\ell m}$ is known perfectly, but $n_{\ell m}$ is a Gaussian random field;
