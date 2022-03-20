@@ -81,7 +81,7 @@ If we are given a map in $\mathrm{K_{CMB}}$ units or $\mathrm K_\mathrm{RJ}$ uni
 
 $$ B_\nu(T_0+dT) = B_\nu(T_0) +\frac{\partial B_\nu}{\partial T}\Delta T$$
 
-$$ T_\mathrm{RJ}^{T_0+dT} = T_\mathrm{RJ}^{T_0} + \frac{c^2}{2\nu^2k}\frac{\partial B_\nu}{\partial T} \Delta T$$
+$$ T_\mathrm{RJ}^{T_0+\Delta T} = T_\mathrm{RJ}^{T_0} + \frac{c^2}{2\nu^2k}\frac{\partial B_\nu}{\partial T} \Delta T$$
 
 From this, it's clear that $\Delta T$'s coefficient is the conversion factor from $\mathrm{K_{CMB}}$ to $\mathrm{K_{RJ}}$;
 
