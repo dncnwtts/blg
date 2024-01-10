@@ -36,4 +36,14 @@ Plugging this into <a href="https://www.wolframalpha.com/input?i=sqrt%282*gravit
 
 
 
+The first thing a physicist will try to fix is adding air resistance, or drag. This just requires modifying Newton's second law;
 
+$$
+m\ddot y=F_{\mathrm{gravity}}+F_{\mathrm{drag}}
+$$
+
+Usually we assume that drag at high velocities is given by $F_D = \frac12\rho v^2 C_d A$, where $C_d$ is the "drag coefficient", which is basically a fudge factor that takes into account the shape of the object, $A$ is the projected area of the object, and $\rho$ is the density of the air itself. Newton's law therefore gives
+
+$$
+\ddot y=\frac12\rho v^2 nC_d A/m-g
+$$
