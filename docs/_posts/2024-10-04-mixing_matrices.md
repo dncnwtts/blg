@@ -10,6 +10,47 @@ tags: [documentation,sample]
 
 Something I have been asked about for a while is how "mixing matrices" work. What is that? Fundamentally, in creating a model of the sky, we maps of "components", $\boldsymbol a_c$, and they get transformed into maps at certain detectors, $\boldsymbol m_b$.
 
+In equation form, we could write this as
+$$
+\boldsymbol m=\mathsf M\boldsymbol a+\boldsymbol n_b
+$$
+The simplest way to do this, and therefore the way I will do it, is to assume that all maps are at the same resolution, and are pixelized in the same way. So to be extremely explicit, the equation above applies to only one pixel at a time. A generalization of this beyond the scope of this note, which I'm writing on a Friday afternoon.
+$$
+\begin{pmatrix}
+m_1\\
+m_2
+\\
+\vdots
+\\
+m_{n_b}
+\end{pmatrix}
+=
+\begin{pmatrix}
+f_1(\nu_1) & f_2(\nu_1) & \cdots & f_{n_c}(\nu_1)
+\\
+f_1(\nu_2) & f_2(\nu_2) & \cdots & f_{n_c}(\nu_2)
+\\
+\vdots
+\\
+f_1(\nu_{n_b}) & f_2(\nu_{n_b}) & \cdots & f_{n_c}(\nu_{n_b})
+\end{pmatrix}
+\begin{pmatrix}
+a_1\\
+a_2\\
+\vdots\\
+a_{n_c}
+\end{pmatrix}
++
+\begin{pmatrix}
+n_1\\
+n_2
+\\
+\vdots
+\\
+n_{n_b}
+\end{pmatrix}
+$$
+
 <!--
 After getting asked by a friend of a friend how an iPhone could survive falling from an airplane, I got a little curious, because it's a problem that can get arbitrarily difficult the more you think about it. Roughly speaking, introductory physics gives you all of the answers, just requires judicious use of Newton's second law, $F=ma$.
 
