@@ -14,7 +14,8 @@ In equation form, we could write this as
 $$
 \boldsymbol m=\mathsf M\boldsymbol a+\boldsymbol n_b
 $$
-The simplest way to do this, and therefore the way I will do it, is to assume that all maps are at the same resolution, and are pixelized in the same way. So to be extremely explicit, the equation above applies to only one pixel at a time. A generalization of this beyond the scope of this note, which I'm writing on a Friday afternoon.
+The simplest way to do this, and therefore the way I will do it, is to assume that all maps are at the same resolution, and are pixelized in the same way. So to be extremely explicit, the equation above applies to only one pixel at a time, a generalization of this which is beyond the scope of this note, which I'm writing on a Friday afternoon.
+
 $$
 \begin{pmatrix}
 m_1\\
@@ -42,75 +43,63 @@ a_{n_c}
 \end{pmatrix}
 +
 \begin{pmatrix}
-n_1\\
-n_2
+n_1\\ n_2
 \\
 \vdots
 \\
 n_{n_b}
 \end{pmatrix}
 $$
-
-<!--
-After getting asked by a friend of a friend how an iPhone could survive falling from an airplane, I got a little curious, because it's a problem that can get arbitrarily difficult the more you think about it. Roughly speaking, introductory physics gives you all of the answers, just requires judicious use of Newton's second law, $F=ma$.
-
-So the first question, how fast would an object falling be moving once it hit the ground? Assuming uniform gravity, we get
-
-$$
-m\ddot y=-mg
-$$
-
-$$
-\dot y=v_{0,y}-gt
-$$
-
-$$
-y=y_0+v_{0,y}t-gt^2/2
+$
+=
+\begin{pmatrix}
+a_1f_1(\nu_1) +a_2f_2(\nu_1) + \cdots + a_{n_c}f_{n_c}(\nu_1)
++n_1
+\\
+a_1f_1(\nu_2) + a_2f_2(\nu_2) + \cdots + a_{n_c}f_{n_c}(\nu_2)
++n_2
+\\
+\vdots
+\\
+a_1f_1(\nu_{n_b}) + a_2f_2(\nu_{n_b}) + \cdots + a_{n_c}f_{n_c}(\nu_{n_b})
++n_{n_b}
+\end{pmatrix}
 $$
 
-Doing a little algebra, and using that $t=mv/g$, we get a nice equation connecting the height and the velocity;
-
+So this is really just basic SED fitting. The mixing matrix basically is a series of functions that give the expected contribution of a component at a certain band. For example, we often assume that synchrotron emission is given by a power law, so we would write
 $$
-y=y_0-\frac12 v^2/g
-\Rightarrow
-v=\sqrt{2g(y_0-y)}
+f_\mathrm{sync}(\nu)=\left(\frac\nu{\nu_0}\right)^{\beta_\mathrm s}.
 $$
-
-Plugging this into <a href="https://www.wolframalpha.com/input?i=sqrt%282*gravitational+acceleration*16000+feet%29">WolframAlpha</a> gives 700 miles per hour. This is weird for a couple of reasons, one that the mass of the falling object didn't matter, and another that this not how fast normal things hit the ground, including, for example, raindrops.
-
+This could be easily expanded to arbitrary components.
 
 
-The first thing a physicist will try to fix is adding air resistance, or drag. This just requires modifying Newton's second law;
+One key point here is that we are taking the parameters of the SED as known. Fitting for $\beta_{\mathrm s}$, for example, requires nonlinear optimization, and can be a bit nasty. But if we don't assume this, then $\mathsf M$ is just a simple array of numbers, and we can use standard linear algebra. If you can afford to be lazy, $\mathtt{np.linalg.solv(M,m)}$ will work just fine for you. But often we want to sample, so let's do that.
 
+The maximum likelihood solution is the equation that minimizes $(\boldsymbol m-\mathsf M\boldsymbol a)^T\mathsf N^{-1}(\boldsymbol m-\mathsf M\boldsymbol a)$, or
 $$
-m\ddot y=F_{\mathrm{gravity}}+F_{\mathrm{drag}}
+(\mathsf M^T\mathsf N^{-1}\mathsf M)\hat{\boldsymbol a}=
+\mathsf M^T\mathsf N^{-1}\boldsymbol m
 $$
+In principle, pretty easy. $\mathsf M^T\mathsf N^{-1}\mathsf M)\hat{\boldsymbol a}$ is an $n_c\times n_c$ matrix. $n_c$ is in practice on the order of 10, so not too much of a computational issue.
 
-Usually we assume that drag at high velocities is given by $F_D = \frac12\rho v^2 C_d A$, where $C_d$ is the "drag coefficient", which is basically a fudge factor that takes into account the shape of the object, $A$ is the projected area of the object, and $\rho$ is the density of the air itself. Newton's law therefore gives
-
+As always though, being Gibbs samplers, we want to draw samples rather than just get the maximum likelihood solution. In that case, we solve the modified equation
 $$
-\ddot y=\frac12\rho v^2 C_d A/m-g
+(\mathsf M^T\mathsf N^{-1}\mathsf M)\hat{\boldsymbol a}=
+\mathsf M^T\mathsf N^{-1}\boldsymbol m
++\mathsf M^T\mathsf N^{1/2}\boldsymbol\eta
 $$
-
-
-This is a hard enough equation to solve that I'm going to put it off for a moment, but the main thing to notice is that there is a special velocity where the acceleration is zero;
-
+and if you want to add some sort of prior $\mathsf N(\boldsymbol\mu,\mathsf S)$, the equation gets modified to
 $$
-v=\sqrt{\frac{2mg}{\rho C_d A}}
-\propto\sqrt{\frac{m}{A}}
+(\mathsf S^{-1}\mathsf M^T\mathsf N^{-1}\mathsf M)\hat{\boldsymbol a}=
+\mathsf M^T\mathsf N^{-1}\boldsymbol m
+\mathsf S^{-1}\boldsymbol\mu
++\mathsf M^T\mathsf N^{1/2}\boldsymbol\eta_1
++\mathsf S^{-1/2}\boldsymbol\eta_2.
 $$
 
 
-My claim that I'm going to leave unproven right now is that this is the velocity that an object would hit the ground. This actually kind of comports with our intuition, that the object's terminal velocity will be higher if it weighs more, and it will be moving slower if it has a larger area (think of a flying squirrel or a parachute).
-
-
-Again, I'm too lazy to do the actual algebra, but <a href="https://www.wolframalpha.com/input?i=sqrt%282*+130+grams*gravitational+acceleration%2F%28air+density*6.33+inches*3.07+inches%29%29">WolframAlpha</a> gives about 28 mph, where I've just assumed $C_d=1$ and an iPhone 14 pro that is flat. The actual answer isn't going to be that much different.
-
-I can do the same thing assuming that I'm (ahem) 100 kg, 6 feet tall, and 15 inches wide, giving 100 miles per hour. These aren't so far off from the reported answers I've found online, and the fact that people can get twice as fast isn't that surprising to me.
-
-
-One of the reasons that we have to get in the details a bit is that, using the same equation in the first part, an iPhone dropped from waist height has a speed of about 10 mph when it hits the ground, only three times slower than the one falling out of the plane.
-
-I also know from personal experience that _sometimes_ an iPhone will be undamaged when dropped on the ground, and _sometimes_ the screen will crack. I don't think I've heard of an iPhone actually _breaking_ from a fall, and I'm not sure that it would happen. Materials physics is clearly difficult! I think the fact that modern phones are trying to be as light and large as possible is both making air resistance help from long falls, while also making them more damage-prone. There are clearly many things happening here.
-
--->
+I think one of the main utilities of the mixing matrices is its ability to smooth calculations when things get a bit more complicated. For instance, you don't actually observe at a single frequency, you observe with a bandpass $\tau(\nu)$ that is integrated over. In this case, the elements of the mixing matrix are
+$$
+\mathsf M_{ij}=\int\,\mathrm d\nu\,\tau_i(\nu) f_{j}(\nu\mid\theta).
+$$
+The really neat thing here is that each mixing matrix element is a continuous function of whatever parameters you are including in $f_{i}(\nu\mid\theta)$, like $\beta_\mathrm s$ for example. If you're smart, you precompute the mixing matrix at a few parameter values and interpolate over them if the parameters change.
