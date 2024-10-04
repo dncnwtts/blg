@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Why didn't that iPhone break?"
+title: "How do mixing matrices work?"
 author: "Duncan J. Watts"
 categories: journal
 tags: [documentation,sample]
@@ -8,6 +8,9 @@ tags: [documentation,sample]
 ---
 
 
+Something I have been asked about for a while is how "mixing matrices" work. What is that? Fundamentally, in creating a model of the sky, we maps of "components", $\boldsymbol a_c$, and they get transformed into maps at certain detectors, $\boldsymbol m_b$.
+
+<!--
 After getting asked by a friend of a friend how an iPhone could survive falling from an airplane, I got a little curious, because it's a problem that can get arbitrarily difficult the more you think about it. Roughly speaking, introductory physics gives you all of the answers, just requires judicious use of Newton's second law, $F=ma$.
 
 So the first question, how fast would an object falling be moving once it hit the ground? Assuming uniform gravity, we get
@@ -68,3 +71,5 @@ I can do the same thing assuming that I'm (ahem) 100 kg, 6 feet tall, and 15 inc
 One of the reasons that we have to get in the details a bit is that, using the same equation in the first part, an iPhone dropped from waist height has a speed of about 10 mph when it hits the ground, only three times slower than the one falling out of the plane.
 
 I also know from personal experience that _sometimes_ an iPhone will be undamaged when dropped on the ground, and _sometimes_ the screen will crack. I don't think I've heard of an iPhone actually _breaking_ from a fall, and I'm not sure that it would happen. Materials physics is clearly difficult! I think the fact that modern phones are trying to be as light and large as possible is both making air resistance help from long falls, while also making them more damage-prone. There are clearly many things happening here.
+
+-->
