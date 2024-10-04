@@ -50,6 +50,7 @@ n_1\\ n_2
 n_{n_b}
 \end{pmatrix}
 $$
+
 $$
 =
 \begin{pmatrix}
@@ -78,12 +79,13 @@ This could be easily expanded to arbitrary components.
 One key point here is that we are taking the parameters of the SED as known. Fitting for $\beta_{\mathrm s}$, for example, requires nonlinear optimization, and can be a bit nasty. But if we don't assume this, then $\mathsf M$ is just a simple array of numbers, and we can use standard linear algebra. If you can afford to be lazy, $\mathtt{np.linalg.solv(M,m)}$ will work just fine for you. But often we want to sample, so let's do that.
 
 The maximum likelihood solution is the equation that minimizes $(\boldsymbol m-\mathsf M\boldsymbol a)^T\mathsf N^{-1}(\boldsymbol m-\mathsf M\boldsymbol a)$, or
+
 $$
 (\mathsf M^T\mathsf N^{-1}\mathsf M)\hat{\boldsymbol a}=
 \mathsf M^T\mathsf N^{-1}\boldsymbol m.
 $$
 
-In principle, pretty easy. $\mathsf M^T\mathsf N^{-1}\mathsf M)\hat{\boldsymbol a}$ is an $n_c\times n_c$ matrix. $n_c$ is in practice on the order of 10, so not too much of a computational issue.
+In principle, pretty easy. $\mathsf M^T\mathsf N^{-1}\mathsf M$ is an $n_c\times n_c$ matrix. $n_c$ is in practice on the order of 10, so not too much of a computational issue.
 
 As always though, being Gibbs samplers, we want to draw samples rather than just get the maximum likelihood solution. In that case, we solve the modified equation
 
@@ -96,9 +98,9 @@ $$
 and if you want to add some sort of prior $\mathsf N(\boldsymbol\mu,\mathsf S)$, the equation gets modified to
 
 $$
-(\mathsf S^{-1}\mathsf M^T\mathsf N^{-1}\mathsf M)\hat{\boldsymbol a}=
+(\mathsf S^{-1} + \mathsf M^T\mathsf N^{-1}\mathsf M)\hat{\boldsymbol a}=
 \mathsf M^T\mathsf N^{-1}\boldsymbol m
-\mathsf S^{-1}\boldsymbol\mu
++\mathsf S^{-1}\boldsymbol\mu
 +\mathsf M^T\mathsf N^{1/2}\boldsymbol\eta_1
 +\mathsf S^{-1/2}\boldsymbol\eta_2.
 $$
