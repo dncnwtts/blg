@@ -50,18 +50,15 @@ n_1\\ n_2
 n_{n_b}
 \end{pmatrix}
 $$
-
+which expands to
 $$
 =
 \begin{pmatrix}
 a_1f_1(\nu_1) +a_2f_2(\nu_1) + \cdots + a_{n_c}f_{n_c}(\nu_1)
-+n_1
-\\
++n_1\\
 a_1f_1(\nu_2) + a_2f_2(\nu_2) + \cdots + a_{n_c}f_{n_c}(\nu_2)
-+n_2
-\\
-\vdots
-\\
++n_2\\
+\vdots\\
 a_1f_1(\nu_{n_b}) + a_2f_2(\nu_{n_b}) + \cdots + a_{n_c}f_{n_c}(\nu_{n_b})
 +n_{n_b}
 \end{pmatrix}
@@ -76,7 +73,7 @@ $$
 This could be easily expanded to arbitrary components.
 
 
-One key point here is that we are taking the parameters of the SED as known. Fitting for $\beta_{\mathrm s}$, for example, requires nonlinear optimization, and can be a bit nasty. But if we don't assume this, then $\mathsf M$ is just a simple array of numbers, and we can use standard linear algebra. If you can afford to be lazy, $\mathtt{np.linalg.solv(M,m)}$ will work just fine for you. But often we want to sample, so let's do that.
+One key point here is that we are taking the parameters of the SED as known. Fitting for $\beta_{\mathrm s}$, for example, requires nonlinear optimization, and can be a bit nasty. But if we don't assume this, then $\mathsf M$ is just a simple array of numbers, and we can use standard linear algebra. If you can afford to be lazy, $\mathtt{np.linalg.solve(M,m)}$ will work just fine for you. But often we want to sample, so let's do that.
 
 The maximum likelihood solution is the equation that minimizes $(\boldsymbol m-\mathsf M\boldsymbol a)^T\mathsf N^{-1}(\boldsymbol m-\mathsf M\boldsymbol a)$, or
 
