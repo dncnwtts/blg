@@ -50,9 +50,10 @@ n_1\\ n_2
 n_{n_b}
 \end{pmatrix}
 $$
+
 which expands to
+
 $$
-=
 \begin{pmatrix}
 a_1f_1(\nu_1) +a_2f_2(\nu_1) + \cdots + a_{n_c}f_{n_c}(\nu_1)
 +n_1\\
